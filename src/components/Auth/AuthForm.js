@@ -17,7 +17,7 @@ const AuthForm = ({onSubmit, isAdmin}) => {
   
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    email: "", 
     password: "",
   });
   const handleChange = (e) => {
