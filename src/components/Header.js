@@ -209,7 +209,7 @@ const Header = () => {
             <Tab LinkComponent={Link} to="/movies" label="Movies" />
             {!isAdminLoggedIn && !isUserLoggedIn && [
               <Tab key="admin" label="Admin" LinkComponent={Link} to="/admin" />,
-              <Tab key="auth" label="User" LinkComponent={Link} to="/auth" />,
+              <Tab key="user" label="User" LinkComponent={Link} to="/user" />,
             ]}
             {isUserLoggedIn && [
               <Tab key="profile" label="Profile" LinkComponent={Link} to="/user" />,
