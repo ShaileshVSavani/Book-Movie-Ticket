@@ -68,9 +68,9 @@ export const newBooking = async (data) => {
     })
     .catch((err) => console.log(err));
 
-  // if (res.status !== 201) {
-  //   return console.log("Unexpected Error");
-  // }
+  if (res.status !== 201) {
+    return console.log("Unexpected Error");
+  }
   const resData = await res.data;
   return resData;
 };
