@@ -9,6 +9,7 @@ import UserProfile from "../components/Profiles/UserProfile";
 import AddMovie from "../components/Movies/AddMovie";
 import AdminProfile from "../components/Profiles/AdminProfile";
 import User from "../components/Auth/User";
+import MovieDetails from "../components/Movies/MovieDetails";
 
 const AllRoutes = () => {
 
@@ -21,6 +22,7 @@ const AllRoutes = () => {
       <Route path="/userProfile" element={<UserProfile />} />
       <Route path="/addMovie" element={<AddMovie />} />
       <Route path="/user-admin" element={<AdminProfile />} />
+      <Route path="/movieDetail/:id" element={<MovieDetails />} />
       <Route path="/booking/:id" element={<Booking />} />
     </Routes>
   );

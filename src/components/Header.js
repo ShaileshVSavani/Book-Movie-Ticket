@@ -106,9 +106,7 @@
 
 // export default Header;
 
-
 //========================
-
 
 import {
   AppBar,
@@ -127,7 +125,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { adminActions, userActions } from "../redux/store";
 
-
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -136,7 +133,6 @@ const Header = () => {
 
   const [value, setValue] = useState(0);
   const [movies, setMovies] = useState([]);
-
 
   useEffect(() => {
     getAllMovies()
@@ -147,11 +143,11 @@ const Header = () => {
   const logout = (isAdmin) => {
     dispatch(isAdmin ? adminActions.logout() : userActions.logout());
   };
- 
+
   // const handleSearch = (e, val) => {
   //   const movie = movies.find((m) => m.Title === val);
   //   console.log("search",movie.id);
-  
+
   //   // navigate(`/booking/${movie.imdbID}`);
   //   if (!isUserLoggedIn) {
   //     navigate(`/booking/${movie.id}`);
@@ -163,29 +159,30 @@ const Header = () => {
       // If search value is cleared, do nothing
       return;
     }
-  
+
     const movie = movies.find((m) => m.Title === val);
-  
+
     if (movie) {
       console.log("search", movie);
-      if (!isUserLoggedIn) {
-        navigate(`/booking/${movie.id}`);
-      }
+      navigate(`/movieDetail/${movie.id}`);
+      // navigate(`/booking/${movie.id}`);
+      // if (!isUserLoggedIn) {
+      //   navigate(`/booking/${movie.id}`);
+      // }
     } else {
       console.log("Movie not found");
     }
   };
-  
 
   return (
     <AppBar position="sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
         <Box width={"20%"}>
-        <IconButton LinkComponent={Link} to="/">
-            <MovieIcon  sx={{color:"white"}}/>
+          <IconButton LinkComponent={Link} to="/">
+            <MovieIcon sx={{ color: "white" }} />
           </IconButton>
         </Box>
-        <Box width={"40%"} margin={"auto"}>
+        {/* <Box width={"30%"} margin={"auto"}>
           <Autocomplete
             onChange={handleSearch}
             sx={{ input: { color: "white" } }}
@@ -198,7 +195,32 @@ const Header = () => {
               />
             )}
           />
+        </Box> */}
+        <Box width={"30%"} margin={"auto"}>
+          <Autocomplete
+            onChange={handleSearch}
+            sx={{
+              input: { color: "white" }, // Input text color
+              "& .MuiAutocomplete-endAdornment": {
+                // This targets the end icons (dropdown and clear/cross icons)
+                color: "white",
+              },
+              "& .MuiSvgIcon-root": {
+                // This targets the arrow and close icons specifically
+                color: "white",
+              },
+            }}
+            options={movies && movies.map((movie) => movie.Title)}
+            renderInput={(params) => (
+              <TextField
+                variant="standard"
+                {...params}
+                placeholder="Search Across Movie"
+              />
+            )}
+          />
         </Box>
+
         <Box display={"flex"}>
           <Tabs
             textColor="inherit"
@@ -207,12 +229,23 @@ const Header = () => {
             onChange={(e, val) => setValue(val)}
           >
             <Tab LinkComponent={Link} to="/movies" label="Movies" />
-            {!isAdminLoggedIn && !isUserLoggedIn && [
-              <Tab key="admin" label="Admin" LinkComponent={Link} to="/admin" />,
-              <Tab key="user" label="User" LinkComponent={Link} to="/user" />,
-            ]}
+            {!isAdminLoggedIn &&
+              !isUserLoggedIn && [
+                <Tab
+                  key="admin"
+                  label="Admin"
+                  LinkComponent={Link}
+                  to="/admin"
+                />,
+                <Tab key="user" label="User" LinkComponent={Link} to="/user" />,
+              ]}
             {isUserLoggedIn && [
-              <Tab key="profile" label="Profile" LinkComponent={Link} to="/user" />,
+              <Tab
+                key="profile"
+                label="Profile"
+                LinkComponent={Link}
+                to="/userProfile"
+              />,
               <Tab
                 key="logout"
                 onClick={() => logout(false)}
@@ -222,8 +255,18 @@ const Header = () => {
               />,
             ]}
             {isAdminLoggedIn && [
-              <Tab key="add-movie" label="Add Movie" LinkComponent={Link} to="/add" />,
-              <Tab key="admin-profile" label="Profile" LinkComponent={Link} to="/user-admin" />,
+              <Tab
+                key="add-movie"
+                label="Add Movie"
+                LinkComponent={Link}
+                to="/addMovie"
+              />,
+              <Tab
+                key="admin-profile"
+                label="Profile"
+                LinkComponent={Link}
+                to="/user-admin"
+              />,
               <Tab
                 key="admin-logout"
                 onClick={() => logout(true)}

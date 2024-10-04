@@ -115,12 +115,13 @@ export const getUserDetails = async () => {
 export const addMovie = async (data) => {
   const res = await axios
     .post(
-      "/movie",
+      "/movies",
+     
       {
-        title: data.title,
-        description: data.description,
-        releaseDate: data.releaseDate,
-        posterUrl: data.posterUrl,
+        Title: data.Title,
+        Plot: data.Plot,
+        Released: data.Released,
+        Poster: data.Poster,
         fetaured: data.fetaured,
         actors: data.actors,
         admin: localStorage.getItem("adminId"),
