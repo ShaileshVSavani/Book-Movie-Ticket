@@ -12,6 +12,8 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { getMovieDetails } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
+import { adminActions } from "../../redux/store";
+import { toast } from "react-toastify";
 
 const MovieDetails = ({isAdmin = false}) => {
 
@@ -34,20 +36,44 @@ const MovieDetails = ({isAdmin = false}) => {
   }, [id]);
 
 
-  const handleBookNow = () => {
-    if (isAdminLoggedIn || isUserLoggedIn) {
-      navigate(`/booking/${movie.id}`);
+  const handleBook = () => {
+    if (isAdminLoggedIn) {
+      toast.info("Please log out as Admin and log in as a User to book a movie.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      setTimeout(() => {
+        dispatch(adminActions.logout());
+        navigate("/user", { state: { from: `/booking/${id}` } });
+      }, 3000);
+    } else if (!isUserLoggedIn) {
+      toast.warning("Please log in as a user to proceed with booking.", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+
+      navigate("/user", { state: { from: `/booking/${id}` } });
+    } else {
+      navigate(`/booking/${id}`);
     }
-    else {
-      if (!isAdmin) {
-        navigate("/user")
-      }
-      else {
-        navigate("/admin")
-      }
-    }
+  };
+
+
+  // const handleBookNow = () => {
+  //   if (isAdminLoggedIn || isUserLoggedIn) {
+  //     navigate(`/booking/${movie.id}`);
+  //   }
+  //   else {
+  //     if (!isAdmin) {
+  //       navigate("/user")
+  //     }
+  //     else {
+  //       navigate("/admin")
+  //     }
+  //   }
    
-  }
+  // }
 
   if (!movie) {
     return <div>Loading...</div>; // Add a loading state
@@ -115,7 +141,7 @@ const MovieDetails = ({isAdmin = false}) => {
                     transform: "scale(0.95)", // Slightly shrink on click
                   },
                 }}
-                onClick={handleBookNow}
+                onClick={handleBook}
               >
                 Book Now
               </Button>

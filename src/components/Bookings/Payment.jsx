@@ -492,7 +492,7 @@ const Payment = () => {
 
   return (
     <>
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick={false} pauseOnFocusLoss draggable pauseOnHover />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick={false} pauseOnFocusLoss draggable pauseOnHover />
       <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" bgcolor="#f0f2f5">
         <Paper elevation={4} sx={{ padding: 4, maxWidth: 400, width: "100%" }}>
           <Typography variant="h4" marginBottom={3} textAlign="center" fontWeight="bold">
