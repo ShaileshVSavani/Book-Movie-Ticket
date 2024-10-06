@@ -12,7 +12,8 @@ import { store } from "./redux/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // axios.defaults.baseURL = "http://localhost:3001";
 // axios.defaults.baseURL = "http://localhost:3000";
-axios.defaults.baseURL = "https://movie-booking-json-server.onrender.com";
+// axios.defaults.baseURL = "https://movie-booking-json-server.onrender.com";
+axios.defaults.baseURL = "https://movie-booking-json-server-1.onrender.com";
 root.render(
   <React.StrictMode>
     <BrowserRouter>
