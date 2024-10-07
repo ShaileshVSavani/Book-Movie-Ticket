@@ -1,6 +1,7 @@
 
 
 import { Button, Box, Typography } from "@mui/material";
+import { useState } from "react";
 
 const SeatSelection = ({ onSeatSelect, bookedSeats, totalSeats = 50 }) => {
   const totalRows = 5; // Number of rows
