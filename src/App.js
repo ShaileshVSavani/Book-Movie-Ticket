@@ -23,7 +23,7 @@ let dispatch = useDispatch()
     else if (localStorage.getItem("adminId")) { 
       dispatch(adminActions.login())
     }
-   },[])
+   })
 
   return (
     <div className="">
