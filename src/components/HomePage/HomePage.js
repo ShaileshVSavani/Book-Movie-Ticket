@@ -237,18 +237,28 @@
 ///=======================
 
 
-import { Box, Button, Typography, CircularProgress } from "@mui/material";
+import { Box, Button, Typography, CircularProgress, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllMovies } from "../../api/api";
 import MovieItem from "../Movies/MoviesItem";
+import { useTheme } from "@emotion/react";
 
 const HomePage = () => {
+
+
+
   const [movies, setMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state for movies
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Check if the screen is small
+
   useEffect(() => {
+
+
+
     const fetchMovies = async () => {
       try {
         setLoading(true); // Start loading
@@ -441,23 +451,26 @@ const HomePage = () => {
         </>
       )}
 
-      {/* Featured Promotions Section */}
-      <Box
+    {/* Featured Promotions Section */}
+    <Box
         marginTop={10}
-        padding={5}
+        padding={isMobile ? 3 : 5} // Adjust padding for mobile
         bgcolor="#f5f5f5"
         textAlign="center"
         width="100%"
       >
         <Typography
-          variant="h4"
+          variant={isMobile ? "h5" : "h4"} // Change font size for mobile
           fontWeight="bold"
           color="textPrimary"
           sx={{ marginBottom: 2 }}
         >
           Special Offers
         </Typography>
-        <Typography variant="body1" color="textSecondary">
+        <Typography
+          variant={isMobile ? "body2" : "body1"} // Change font size for mobile
+          color="textSecondary"
+        >
           Get a 20% discount on movie tickets when you book through our app.
           <br /> Enjoy exclusive deals on snacks and drinks!
         </Typography>
@@ -468,7 +481,7 @@ const HomePage = () => {
             marginTop: 3,
             paddingX: 4,
             paddingY: 1.5,
-            fontSize: "1.2rem",
+            fontSize: isMobile ? "1rem" : "1.2rem", // Adjust button font size for mobile
             fontWeight: "bold",
           }}
         >
@@ -481,15 +494,15 @@ const HomePage = () => {
         sx={{
           backgroundColor: "#2b2d42",
           color: "white",
-          padding: "2rem 0",
+          padding: isMobile ? "1rem 0" : "2rem 0", // Adjust padding for mobile
           textAlign: "center",
           marginTop: 5,
         }}
       >
-        <Typography variant="h6" gutterBottom>
+        <Typography variant={isMobile ? "subtitle1" : "h6"} gutterBottom>
           Movie Booking App © 2024
         </Typography>
-        <Typography variant="body2" color="grey.500">
+        <Typography variant={isMobile ? "body2" : "body2"} color="grey.500">
           All rights reserved. Terms and Conditions | Privacy Policy
         </Typography>
       </Box>
