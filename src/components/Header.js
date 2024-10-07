@@ -181,7 +181,6 @@
 import {
   AppBar,
   Autocomplete,
-  Box,
   IconButton,
   Tab,
   Tabs,
