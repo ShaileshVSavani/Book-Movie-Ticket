@@ -1,12 +1,13 @@
 
 
 import { Button, Box, Typography } from "@mui/material";
-import { useState } from "react";
+import React from "react";
+
 
 const SeatSelection = ({ onSeatSelect, bookedSeats, totalSeats = 50 }) => {
   const totalRows = 5; // Number of rows
   const seatsPerRow = 10; // Seats per row
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] = React.useState([]);
 
   // Letters for row labeling (e.g., A, B, C, ...)
   const rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").slice(0, totalRows);
