@@ -9,21 +9,48 @@ const BookingConfirmation = ({ userId }) => {
   
   const { movie, seatNumbers, date, time, totalPrice, bookingId } = location.state || {};
 
+  // useEffect(() => {
+  //   if (userId) {
+  //     // Get existing bookings for the specific user from localStorage
+  //     const existingBookings = JSON.parse(localStorage.getItem(`bookings_${userId}`)) || [];
+
+  //     // Create a new booking object
+  //     const newBooking = {
+  //       bookingId,
+  //       movie,
+  //       date,
+  //       time,
+  //       seats: seatNumbers,
+  //       totalPrice,
+  //     };
+
+  //     // Add new booking to the array and store it in localStorage for the specific user
+  //     const updatedBookings = [...existingBookings, newBooking];
+  //     localStorage.setItem(`bookings_${userId}`, JSON.stringify(updatedBookings));
+  //   } else {
+  //     console.error("Error: User ID is not available");
+  //   }
+  // }, [movie, seatNumbers, date, time, totalPrice, bookingId, userId]);
+
+
   useEffect(() => {
     if (userId) {
       // Get existing bookings for the specific user from localStorage
       const existingBookings = JSON.parse(localStorage.getItem(`bookings_${userId}`)) || [];
-
+  
       // Create a new booking object
       const newBooking = {
         bookingId,
-        movie,
+        movie: {
+          Title: movie?.Title,  // Ensure movie title is stored properly
+          // You can add other movie details here as needed
+        },
         date,
         time,
-        seats: seatNumbers,
+        seatNumbers,
         totalPrice,
       };
-
+  
       // Add new booking to the array and store it in localStorage for the specific user
       const updatedBookings = [...existingBookings, newBooking];
       localStorage.setItem(`bookings_${userId}`, JSON.stringify(updatedBookings));
@@ -31,6 +58,7 @@ const BookingConfirmation = ({ userId }) => {
       console.error("Error: User ID is not available");
     }
   }, [movie, seatNumbers, date, time, totalPrice, bookingId, userId]);
+  
 
   const handleViewBookings = () => {
     navigate("/userProfile", {

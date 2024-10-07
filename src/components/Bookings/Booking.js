@@ -1234,6 +1234,28 @@ const Booking = () => {
     setInputs((prevState) => ({ ...prevState, seatNumbers: selectedSeats }));
   };
 
+  // Assuming this function is called to save a booking
+const saveBooking = (movieTitle, date, time, seatNumbers, totalPrice) => {
+  // Get existing bookings from localStorage or initialize an empty array
+  const existingBookings = JSON.parse(localStorage.getItem('bookings')) || [];
+
+  // Create a new booking object
+  const newBooking = {
+    Title: movieTitle,
+    date: date,
+    time: time,
+    seatNumbers: seatNumbers,
+    totalPrice: totalPrice
+  };
+
+  // Add the new booking to the existing bookings array
+  existingBookings.push(newBooking);
+
+  // Save the updated bookings array back to localStorage
+  localStorage.setItem('bookings', JSON.stringify(existingBookings));
+};
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const totalPrice = calculatePrice();
