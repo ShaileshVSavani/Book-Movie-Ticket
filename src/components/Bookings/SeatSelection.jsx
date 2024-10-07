@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+
 import { Button, Box, Typography } from "@mui/material";
 
 const SeatSelection = ({ onSeatSelect, bookedSeats, totalSeats = 50 }) => {
