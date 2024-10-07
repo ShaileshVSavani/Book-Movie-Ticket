@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { adminActions, userActions } from "../../redux/store";
+import { adminActions } from "../../redux/store";
 import { toast } from "react-toastify"; // No need to import ToastContainer
 
 const MovieItem = ({ Title, Released, Poster, id }) => {
