@@ -73,7 +73,7 @@ const Booking = () => {
       (booking) => booking.movieId === id && booking.date === inputs.date && booking.time === inputs.time
     );
 
-    const totalBookedSeats = existingBooking ? existingBooking.seatNumbers.length : 0;
+  
     const remainingSeats = totalSeats - bookedSeats.length; // Check against total booked seats
 
     if (inputs.seatNumbers.length > remainingSeats) {
