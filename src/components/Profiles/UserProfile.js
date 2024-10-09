@@ -34,12 +34,12 @@ const UserProfile = () => {
       const storedBookings = JSON.parse(localStorage.getItem(`booking_${userId}`)) || [];
       setBookings(storedBookings);
 
-      const storedCanceledBookings = JSON.parse(localStorage.getItem(`canceledBookings_${userId}`)) || [];
-      setCanceledBookings(storedCanceledBookings);
+      // const storedCanceledBookings = JSON.parse(localStorage.getItem(`canceledBookings_${userId}`)) || [];
+      // setCanceledBookings(storedCanceledBookings);
 
       // Fetch booked seats from localStorage
-      const storedBookedSeats = JSON.parse(localStorage.getItem("bookedSeats")) || [];
-      setBookedSeats(storedBookedSeats);
+      // const storedBookedSeats = JSON.parse(localStorage.getItem("bookedSeats")) || [];
+      // setBookedSeats(storedBookedSeats);
     }
   }, []);
 
