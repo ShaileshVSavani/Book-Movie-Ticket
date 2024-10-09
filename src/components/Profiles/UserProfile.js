@@ -14,13 +14,13 @@ import {
   TableRow,
 } from "@mui/material";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
-  const [canceledBookings, setCanceledBookings] = useState([]);
-  const [bookedSeats, setBookedSeats] = useState([]);
+  // const [canceledBookings, setCanceledBookings] = useState([]);
+  // const [bookedSeats, setBookedSeats] = useState([]);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
