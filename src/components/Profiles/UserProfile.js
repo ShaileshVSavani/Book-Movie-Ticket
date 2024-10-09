@@ -20,6 +20,7 @@ const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [canceledBookings, setCanceledBookings] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -35,6 +36,10 @@ const UserProfile = () => {
 
       const storedCanceledBookings = JSON.parse(localStorage.getItem(`canceledBookings_${userId}`)) || [];
       setCanceledBookings(storedCanceledBookings);
+
+      // Fetch booked seats from localStorage
+      const storedBookedSeats = JSON.parse(localStorage.getItem("bookedSeats")) || [];
+      setBookedSeats(storedBookedSeats);
     }
   }, []);
 
@@ -60,7 +65,14 @@ const UserProfile = () => {
         );
       }
 
-      toast.success("Booking canceled successfully!");
+      // Remove canceled seats from bookedSeats
+      const updatedBookedSeats = bookedSeats.filter(
+        (seat) => !canceled.seatNumbers.includes(seat)
+      );
+      setBookedSeats(updatedBookedSeats);
+      localStorage.setItem("bookedSeats", JSON.stringify(updatedBookedSeats));
+
+      toast.success("Booking canceled successfully! Seats are now available.");
     }
   };
 
@@ -92,14 +104,14 @@ const UserProfile = () => {
                       <TableCell>Time</TableCell>
                       <TableCell>Seats</TableCell>
                       <TableCell>Total Price</TableCell>
-                      <TableCell>Actions</TableCell>
+                      {/* <TableCell>Actions</TableCell> */}
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {bookings.map((booking, index) => (
                       <TableRow key={index}>
                         <TableCell>{booking.bookingId}</TableCell>
-                        <TableCell>{booking.movieTitle || "N/A"}</TableCell> {/* Updated line */}
+                        <TableCell>{booking.movieTitle || "N/A"}</TableCell>
                         <TableCell>{booking.date || "N/A"}</TableCell>
                         <TableCell>{booking.time || "N/A"}</TableCell>
                         <TableCell>
@@ -108,7 +120,7 @@ const UserProfile = () => {
                             : "N/A"}
                         </TableCell>
                         <TableCell>Rs. {booking.totalPrice || "N/A"}</TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                           <Button
                             variant="contained"
                             color="secondary"
@@ -116,7 +128,7 @@ const UserProfile = () => {
                           >
                             Cancel Booking
                           </Button>
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
                     ))}
                   </TableBody>
@@ -127,7 +139,7 @@ const UserProfile = () => {
             )}
           </Box>
 
-          <Box marginTop={4}>
+          {/* <Box marginTop={4}>
             <Typography variant="h6" gutterBottom>
               Canceled Bookings History
             </Typography>
@@ -148,7 +160,7 @@ const UserProfile = () => {
                     {canceledBookings.map((booking, index) => (
                       <TableRow key={index}>
                         <TableCell>{booking.bookingId}</TableCell>
-                        <TableCell>{booking.movieTitle || "N/A"}</TableCell> {/* Updated line */}
+                        <TableCell>{booking.movieTitle || "N/A"}</TableCell>
                         <TableCell>{booking.date || "N/A"}</TableCell>
                         <TableCell>{booking.time || "N/A"}</TableCell>
                         <TableCell>
@@ -165,7 +177,7 @@ const UserProfile = () => {
             ) : (
               <Typography>No canceled bookings</Typography>
             )}
-          </Box>
+          </Box> */}
         </Grid>
       </Grid>
     </Box>
@@ -173,4 +185,3 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
-
