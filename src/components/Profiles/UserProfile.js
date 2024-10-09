@@ -4,7 +4,7 @@ import {
   Box,
   Typography,
   Paper,
-  Button,
+
   Grid,
   Table,
   TableBody,
@@ -43,38 +43,38 @@ const UserProfile = () => {
     }
   }, []);
 
-  const cancelBooking = (bookingId) => {
-    const updatedBookings = bookings.filter(
-      (booking) => booking.bookingId !== bookingId
-    );
+  // const cancelBooking = (bookingId) => {
+  //   const updatedBookings = bookings.filter(
+  //     (booking) => booking.bookingId !== bookingId
+  //   );
 
-    const canceled = bookings.find(
-      (booking) => booking.bookingId === bookingId
-    );
+  //   const canceled = bookings.find(
+  //     (booking) => booking.bookingId === bookingId
+  //   );
 
-    if (canceled) {
-      setCanceledBookings([...canceledBookings, canceled]);
-      setBookings(updatedBookings);
+  //   if (canceled) {
+  //     setCanceledBookings([...canceledBookings, canceled]);
+  //     setBookings(updatedBookings);
 
-      const userId = localStorage.getItem("userId");
-      if (userId) {
-        localStorage.setItem(`booking_${userId}`, JSON.stringify(updatedBookings));
-        localStorage.setItem(
-          `canceledBookings_${userId}`,
-          JSON.stringify([...canceledBookings, canceled])
-        );
-      }
+  //     const userId = localStorage.getItem("userId");
+  //     if (userId) {
+  //       localStorage.setItem(`booking_${userId}`, JSON.stringify(updatedBookings));
+  //       localStorage.setItem(
+  //         `canceledBookings_${userId}`,
+  //         JSON.stringify([...canceledBookings, canceled])
+  //       );
+  //     }
 
-      // Remove canceled seats from bookedSeats
-      const updatedBookedSeats = bookedSeats.filter(
-        (seat) => !canceled.seatNumbers.includes(seat)
-      );
-      setBookedSeats(updatedBookedSeats);
-      localStorage.setItem("bookedSeats", JSON.stringify(updatedBookedSeats));
+  //     // Remove canceled seats from bookedSeats
+  //     const updatedBookedSeats = bookedSeats.filter(
+  //       (seat) => !canceled.seatNumbers.includes(seat)
+  //     );
+  //     setBookedSeats(updatedBookedSeats);
+  //     localStorage.setItem("bookedSeats", JSON.stringify(updatedBookedSeats));
 
-      toast.success("Booking canceled successfully! Seats are now available.");
-    }
-  };
+  //     toast.success("Booking canceled successfully! Seats are now available.");
+  //   }
+  // };
 
   return (
     <Box display="flex" justifyContent="center" padding={3}>
